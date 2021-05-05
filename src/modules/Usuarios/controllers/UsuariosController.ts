@@ -1,12 +1,20 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import AppError from '../../../errors/AppError';
 
 import CreateUsuarioService from '../services/CreateUsuarioService';
 
 class UsuariosController {
     async create(request: Request, response: Response): Promise<Response> {
         try {
-            const { nome, tipoId, email, senha } = request.body;
+            const { nome, tipoId, email, senha, usuarioLogado } = request.body;
+
+            if (usuarioLogado.tipoId !== 1 && usuarioLogado.tipoId !== 2) {
+                throw new AppError(
+                    'Usuário não tem permissão para cadastrar novos usuários',
+                    401,
+                );
+            }
 
             const createUsuario = container.resolve(CreateUsuarioService);
 
@@ -19,7 +27,7 @@ class UsuariosController {
 
             return response.json(usuario);
         } catch (e) {
-            return response.status(e.satusCode).json({ error: e.message });
+            return response.status(e.statusCode).json({ error: e.message });
         }
     }
 }

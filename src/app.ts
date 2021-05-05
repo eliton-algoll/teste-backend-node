@@ -15,6 +15,5 @@ app.use(cors());
 app.use(express.json());
 
 app.use(routes);
-app.get('/', (req, res) => res.json([{ msgm: 'asd' }]));
 
 export default app;

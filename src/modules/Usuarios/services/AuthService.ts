@@ -1,11 +1,18 @@
 import { compare } from 'bcryptjs';
 import { injectable, inject } from 'tsyringe';
 
+import { sign } from 'jsonwebtoken';
 import IUsuariosRepository from '../repositories/IUsuariosRepository';
 import AppError from '../../../errors/AppError';
+import authConfig from '../../../config/auth';
 
 import Usuario from '../typeorm/entities/Usuario';
 import IAuthRequestDTO from '../dtos/IAuthRequestDTO';
+
+interface IResponse {
+    usuario: Usuario;
+    token: string;
+}
 
 @injectable()
 class AuthService {
@@ -14,7 +21,10 @@ class AuthService {
         private usuariosRepository: IUsuariosRepository,
     ) {}
 
-    public async execute({ email, senha }: IAuthRequestDTO): Promise<Usuario> {
+    public async execute({
+        email,
+        senha,
+    }: IAuthRequestDTO): Promise<IResponse> {
         const usuario = await this.usuariosRepository.findByEmail(email);
 
         if (!usuario) {
@@ -27,7 +37,14 @@ class AuthService {
             throw new AppError('Usuário ou senha inválida.', 401);
         }
 
-        return usuario;
+        const { secret, expiresIn } = authConfig.jwt;
+
+        const token = sign({ tipoId: usuario.tipoId }, secret, {
+            subject: `${usuario.id}`,
+            expiresIn,
+        });
+
+        return { usuario, token };
     }
 }
 

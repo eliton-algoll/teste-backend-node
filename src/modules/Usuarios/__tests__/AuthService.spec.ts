@@ -23,7 +23,7 @@ describe('AuthService', () => {
             senha: '1234Abc',
         });
 
-        expect(response.body).toHaveProperty('id');
+        expect(response.body).toHaveProperty('token');
     });
 
     it('não pode ser possível logar com um email inexistente', async () => {
