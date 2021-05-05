@@ -13,4 +13,6 @@ export default interface IUsuarios {
     delete(id: number): Promise<boolean>;
 
     alterStatus(data: IUpdateStatusUsuarioDTO): Promise<Usuario>;
+
+    findByEmail(email: string): Promise<Usuario | undefined>;
 }

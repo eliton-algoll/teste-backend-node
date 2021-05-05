@@ -22,6 +22,7 @@
         "no-use-before-define": "off",
         "prettier/prettier": "error",
         "class-methods-use-this": "off",
+        "no-useless-constructor": "off",
         "@typescript-eslint/no-use-before-define": [
             "error"
         ],

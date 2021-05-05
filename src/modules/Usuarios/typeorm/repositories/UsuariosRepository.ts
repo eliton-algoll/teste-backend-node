@@ -60,6 +60,17 @@ class UsuariosRepository implements IUsuariosRepository {
 
         return usuarioUpdated;
     }
+
+    public async findByEmail(email: string): Promise<Usuario | undefined> {
+        const usuario = await this.ormRepository
+            .createQueryBuilder('usuario')
+            .where('usuario.email = :email', {
+                email,
+            })
+            .getOne();
+
+        return usuario || undefined;
+    }
 }
 
 export default UsuariosRepository;
