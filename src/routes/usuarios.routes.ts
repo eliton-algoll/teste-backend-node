@@ -13,4 +13,6 @@ routes.get('/', usuariosController.show);
 
 routes.post('/create', usuariosController.create);
 
+routes.put('/update', usuariosController.update);
+
 export default routes;

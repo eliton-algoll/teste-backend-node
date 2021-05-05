@@ -2,7 +2,6 @@ import { getRepository, Repository } from 'typeorm';
 import IUsuariosRepository from '../../repositories/IUsuariosRepository';
 import Usuario from '../entities/Usuario';
 import IcreateUsuarioDTO from '../../dtos/ICreateUsuarioDTO';
-import IUpdateUsuarioDTO from '../../dtos/IUpdateUsuarioDTO';
 import IUpdateStatusUsuarioDTO from '../../dtos/IUpdateStatusUsuarioDTO';
 
 class UsuariosRepository implements IUsuariosRepository {
@@ -25,16 +24,8 @@ class UsuariosRepository implements IUsuariosRepository {
         return usuario || undefined;
     }
 
-    public async update(data: IUpdateUsuarioDTO): Promise<Usuario> {
-        const { id, nome, tipoId } = data;
-
-        const findUsuario = await this.ormRepository.findOne(id);
-
-        const usuario = { ...findUsuario, nome, tipoId };
-
-        const usuarioUpdated = await this.ormRepository.save(usuario);
-
-        return usuarioUpdated;
+    public async update(usuario: Usuario): Promise<Usuario> {
+        return this.ormRepository.save(usuario);
     }
 
     public async delete(id: number): Promise<boolean> {

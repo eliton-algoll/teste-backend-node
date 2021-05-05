@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 import AppError from '../../../errors/AppError';
 
 import CreateUsuarioService from '../services/CreateUsuarioService';
+import UpdateUsuarioService from '../services/UpdateUsuarioService';
 import UsuariosRepository from '../typeorm/repositories/UsuariosRepository';
 
 class UsuariosController {
@@ -43,6 +44,31 @@ class UsuariosController {
             if (!usuario) {
                 throw new AppError('Usuário não encontrado', 404);
             }
+
+            return response.json(usuario);
+        } catch (e) {
+            return response.status(e.statusCode).json({ error: e.message });
+        }
+    }
+
+    async update(request: Request, response: Response): Promise<Response> {
+        try {
+            const { id, nome, tipoId, usuarioLogado } = request.body;
+
+            if (usuarioLogado.tipoId !== 1 && usuarioLogado.tipoId !== 2) {
+                throw new AppError(
+                    'Usuário não tem permissão para alterar dados',
+                    401,
+                );
+            }
+
+            const updateUsuario = container.resolve(UpdateUsuarioService);
+
+            const usuario = await updateUsuario.execute({
+                id,
+                nome,
+                tipoId,
+            });
 
             return response.json(usuario);
         } catch (e) {
