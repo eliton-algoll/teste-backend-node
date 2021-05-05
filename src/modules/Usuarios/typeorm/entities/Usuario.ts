@@ -13,12 +13,12 @@ class Usuario {
     @PrimaryGeneratedColumn('increment')
     id: number;
 
-    @Column({ name: 'tipo', type: 'int' })
+    @Column({ name: 'tipo', type: 'integer' })
     tipoId: number;
 
     @ManyToOne(() => Tipo)
-    @JoinColumn()
-    tipo: Tipo;
+    @JoinColumn({ name: 'tipo' })
+    tipoJoin: Tipo;
 
     @Column()
     nome: string;

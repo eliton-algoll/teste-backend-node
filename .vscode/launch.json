@@ -14,7 +14,7 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}/src/routes.ts",
-            "outFiles": [
+            "outFiles": [ 
                 "${workspaceFolder}/**/*.js"
             ]
         }

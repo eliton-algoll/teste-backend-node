@@ -15,6 +15,7 @@ export default class CreateUsuarios1620138843230 implements MigrationInterface {
                         name: 'id',
                         type: 'integer',
                         isPrimary: true,
+                        isGenerated: true,
                         generationStrategy: 'increment',
                     },
                     {
