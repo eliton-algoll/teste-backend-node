@@ -8,9 +8,9 @@ export default interface IUsuarios {
 
     findOne(id: number): Promise<Usuario | undefined>;
 
-    update(data: IUpdateUsuarioDTO): Promise<Usuario>;
+    update(usuario: IUpdateUsuarioDTO): Promise<Usuario>;
 
-    delete(id: number): Promise<boolean>;
+    delete(usuario: Usuario): Promise<boolean>;
 
     alterStatus(data: IUpdateStatusUsuarioDTO): Promise<Usuario>;
 

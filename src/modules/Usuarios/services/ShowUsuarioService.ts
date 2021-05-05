@@ -3,10 +3,10 @@ import { injectable, inject } from 'tsyringe';
 import AppError from '../../../errors/AppError';
 import IUsuariosRepository from '../repositories/IUsuariosRepository';
 import Usuario from '../typeorm/entities/Usuario';
-import IUpdateUsuarioDTO from '../dtos/IUpdateUsuarioDTO';
+import IDeleteUsuarioDTO from '../dtos/IDeleteUsuarioDTO';
 
 @injectable()
-class UpdateUsuarioService {
+class ShowUsuarioService {
     constructor(
         @inject('UsuariosRepository')
         private usuariosRepository: IUsuariosRepository,
@@ -14,13 +14,11 @@ class UpdateUsuarioService {
 
     public async execute({
         id,
-        nome,
-        tipoId,
         usuarioLogado,
-    }: IUpdateUsuarioDTO): Promise<Usuario> {
+    }: IDeleteUsuarioDTO): Promise<Usuario> {
         if (usuarioLogado?.tipoId === 3 && id !== usuarioLogado?.id) {
             throw new AppError(
-                'Usuário não tem permissão para alterar dados de outros usuários',
+                'Usuário não tem permissão para visualizar dados de outros usuários',
                 401,
             );
         }
@@ -31,14 +29,8 @@ class UpdateUsuarioService {
             throw new AppError('Usuário não encontrado', 404);
         }
 
-        const usuarioUpdated = this.usuariosRepository.update({
-            ...usuario,
-            nome,
-            tipoId,
-        });
-
-        return usuarioUpdated;
+        return usuario;
     }
 }
 
-export default UpdateUsuarioService;
+export default ShowUsuarioService;

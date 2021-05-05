@@ -19,7 +19,15 @@ class CreateUsuarioService {
         tipoId,
         email,
         senha,
+        usuarioLogado,
     }: ICreateUsuarioDTO): Promise<Usuario> {
+        if (usuarioLogado?.tipoId !== 1 && usuarioLogado?.tipoId !== 2) {
+            throw new AppError(
+                'Usuário não tem permissão para cadastrar novos usuários',
+                401,
+            );
+        }
+
         const usuarioExiste = await this.usuariosRepository.findByEmail(email);
 
         if (usuarioExiste) {

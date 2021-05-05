@@ -28,14 +28,10 @@ class UsuariosRepository implements IUsuariosRepository {
         return this.ormRepository.save(usuario);
     }
 
-    public async delete(id: number): Promise<boolean> {
-        const usuario = await this.ormRepository.findOne(id);
-
-        if (!usuario) {
+    public async delete(usuario: Usuario): Promise<boolean> {
+        if (!this.ormRepository.delete(usuario)) {
             return false;
         }
-
-        await this.ormRepository.delete(usuario);
 
         return true;
     }

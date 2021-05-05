@@ -6,6 +6,11 @@ interface ICreateUsuarioDTO {
     email: string;
 
     senha: string;
+
+    usuarioLogado?: {
+        id: number;
+        tipoId: number;
+    };
 }
 
 export default ICreateUsuarioDTO;

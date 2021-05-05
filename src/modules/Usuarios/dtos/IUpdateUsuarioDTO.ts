@@ -4,6 +4,11 @@ interface IUpdateUsuarioDTO {
     nome: string;
 
     tipoId: number;
+
+    usuarioLogado?: {
+        id: number;
+        tipoId: number;
+    };
 }
 
 export default IUpdateUsuarioDTO;
