@@ -6,7 +6,7 @@ import ShowUsuarioService from '../services/ShowUsuarioService';
 import CreateUsuarioService from '../services/CreateUsuarioService';
 import UpdateUsuarioService from '../services/UpdateUsuarioService';
 import DeleteUsuarioService from '../services/DeleteUsuarioService';
-import UsuariosRepository from '../typeorm/repositories/UsuariosRepository';
+import UpdateStatusUsuarioService from '../services/UpdateStatusUsuarioService';
 
 class UsuariosController {
     async create(request: Request, response: Response): Promise<Response> {
@@ -59,6 +59,29 @@ class UsuariosController {
                 id,
                 nome,
                 tipoId,
+                usuarioLogado,
+            });
+
+            return response.json(usuario);
+        } catch (e) {
+            return response.status(e.statusCode).json({ error: e.message });
+        }
+    }
+
+    async alteraStatus(
+        request: Request,
+        response: Response,
+    ): Promise<Response> {
+        try {
+            const { id, status, usuarioLogado } = request.body;
+
+            const updateStatusUsuario = container.resolve(
+                UpdateStatusUsuarioService,
+            );
+
+            const usuario = await updateStatusUsuario.execute({
+                id,
+                status,
                 usuarioLogado,
             });
 

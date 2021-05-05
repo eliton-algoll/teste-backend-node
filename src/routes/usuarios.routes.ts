@@ -15,6 +15,8 @@ routes.post('/create', usuariosController.create);
 
 routes.put('/update', usuariosController.update);
 
+routes.put('/alterastatus', usuariosController.alteraStatus);
+
 routes.delete('/delete', usuariosController.delete);
 
 export default routes;

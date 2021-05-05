@@ -36,16 +36,10 @@ class UsuariosRepository implements IUsuariosRepository {
         return true;
     }
 
-    public async alterStatus(data: IUpdateStatusUsuarioDTO): Promise<Usuario> {
-        const { id, status } = data;
-
-        const findUsuario = await this.ormRepository.findOne(id);
-
-        const usuario = { ...findUsuario, status };
-
-        const usuarioUpdated = await this.ormRepository.save(usuario);
-
-        return usuarioUpdated;
+    public async alterStatus(
+        usuario: IUpdateStatusUsuarioDTO,
+    ): Promise<Usuario> {
+        return this.ormRepository.save(usuario);
     }
 
     public async findByEmail(email: string): Promise<Usuario | undefined> {

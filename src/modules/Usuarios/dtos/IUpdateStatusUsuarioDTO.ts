@@ -3,7 +3,7 @@ interface IUpdateStatusUsuarioDTO {
 
     status: boolean;
 
-    usuarioLogado: {
+    usuarioLogado?: {
         id: number;
         tipoId: number;
     };
