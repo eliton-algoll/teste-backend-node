@@ -3,8 +3,8 @@ import { Router } from 'express';
 import UsuariosController from '../modules/Usuarios/controllers/UsuariosController';
 
 const routes = Router();
-const tiposController = new UsuariosController();
+const usuariosController = new UsuariosController();
 
-routes.post('/create', tiposController.create);
+routes.post('/create', usuariosController.create);
 
 export default routes;
