@@ -20,7 +20,7 @@ describe('AuthService', () => {
     it('usuário deve conseguir efetuar login', async () => {
         const response = await request(app).post('/login').send({
             email: 'testeAdmin@admin.com.br',
-            senha: '1234Abc',
+            senha: '123456',
         });
 
         expect(response.body).toHaveProperty('token');
@@ -29,7 +29,7 @@ describe('AuthService', () => {
     it('não pode ser possível logar com um email inexistente', async () => {
         const response = await request(app).post('/login').send({
             email: 'testeAdminInexistente@admin.com.br',
-            senha: '1234Abc',
+            senha: '123456',
         });
 
         expect(response.body).toHaveProperty('error');

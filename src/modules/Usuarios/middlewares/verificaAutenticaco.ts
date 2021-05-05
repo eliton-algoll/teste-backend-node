@@ -29,7 +29,7 @@ export default function validaAutenticacao(
         const { sub, tipoId } = decoded as ITokenPayload;
 
         request.body.usuarioLogado = {
-            id: sub,
+            id: Number(sub),
             tipoId,
         };
 

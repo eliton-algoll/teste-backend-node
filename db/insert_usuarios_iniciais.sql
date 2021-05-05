@@ -1,0 +1,3 @@
+INSERT INTO `teste_backend`.`usuarios` (`id`,`tipo`,`nome`,`email`,`senha`,`status`) VALUES (1,1,'usuário teste root','testeRoot@admin.com.br','$2a$10$hC5qarQ3/4BFv6VBZYppJOCcNIqnuw2nEtQnX3YPb5LfCk7Inh/7G',1);
+INSERT INTO `teste_backend`.`usuarios` (`id`,`tipo`,`nome`,`email`,`senha`,`status`) VALUES (2,2,'usuário teste admin','testeAdmin@admin.com.br','$2a$10$cwCvnGXczcndrscV9fLfTOLD.y9DoxnWFjCh3Tuew3bfy5oMOcy7e',1);
+INSERT INTO `teste_backend`.`usuarios` (`id`,`tipo`,`nome`,`email`,`senha`,`status`) VALUES (3,3,'usuario teste geral','testeGeral@admin.com.br','$2a$10$wef3MbnyhTGEHIfOyIt28uCzPVZkFBgb4Nb9aPEwwM7gSxJfND0ba',1);
