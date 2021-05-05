@@ -1,11 +1,14 @@
 import 'dotenv/config';
-
-import express from 'express';
-import routes from './routes';
-
+import 'reflect-metadata';
 import './database';
 
+import express from 'express';
+import cors from 'cors';
+import routes from './routes';
+
 const app = express();
+
+app.use(cors());
 
 app.use(express.json());
 
