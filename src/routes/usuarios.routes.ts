@@ -8,6 +8,9 @@ const routes = Router();
 const usuariosController = new UsuariosController();
 
 routes.use(verificaAutenticacao);
+
+routes.get('/', usuariosController.show);
+
 routes.post('/create', usuariosController.create);
 
 export default routes;
