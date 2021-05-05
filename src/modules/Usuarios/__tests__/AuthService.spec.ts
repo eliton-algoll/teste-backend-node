@@ -3,8 +3,6 @@ import request from 'supertest';
 import { Connection, getConnection, createConnection } from 'typeorm';
 import app from '../../../app';
 
-import AppError from '../../../errors/AppError';
-
 let connectionTest: Connection;
 
 describe('AuthService', () => {
